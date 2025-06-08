@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QCM Maths Generator - Nombres Réels</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="description" content="Générateur automatique de QCM mathématiques sur les nombres réels">
+    
+    <!-- PWA meta tags -->
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="QCM Maths">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🧮 QCM Maths Generator</h1>
+                <p>Nombres Réels & Racines Carrées</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <span class="progress-text" id="progressText">Question 0/0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Start Screen -->
+            <div id="startScreen" class="screen active">
+                <div class="start-card">
+                    <div class="start-icon">📐</div>
+                    <h2>Prêt pour le QCM ?</h2>
+                    <p>Testez vos connaissances sur les nombres réels, les racines carrées et les intervalles.</p>
+                    
+                    <div class="quiz-info">
+                        <div class="info-item">
+                            <span class="info-icon">⏱️</span>
+                            <span>20 minutes</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">❓</span>
+                            <span id="totalQuestions">25 questions</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">🎯</span>
+                            <span>4 choix par question</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-selector">
+                        <h3>Choisissez les catégories :</h3>
+                        <div class="category-options">
+                            <label class="category-option">
+                                <input type="checkbox" value="definition" checked>
+                                <span class="category-label">📚 Définitions</span>
+                            </label>
+                            <label class="category-option">
+                                <input type="checkbox" value="calculation" checked>
+                                <span class="category-label">🧮 Calculs</span>
+                            </label>
+                            <label class="category-option">
+                                <input type="checkbox" value="property" checked>
+                                <span class="category-label">⚡ Propriétés</span>
+                            </label>
+                            <label class="category-option">
+                                <input type="checkbox" value="interval" checked>
+                                <span class="category-label">📏 Intervalles</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button id="startQuiz" class="start-button">
+                        🚀 Commencer le QCM
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div id="quizScreen" class="screen">
+                <div class="quiz-card">
+                    <div class="question-header">
+                        <div class="question-number" id="questionNumber">Question 1</div>
+                        <div class="timer" id="timer">⏰ 20:00</div>
+                    </div>
+                    
+                    <div class="question-content">
+                        <h3 id="questionText">Quelle est la définition de √a ?</h3>
+                        
+                        <div class="options-container" id="optionsContainer">
+                            <!-- Options générées dynamiquement -->
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-controls">
+                        <button id="prevButton" class="control-button secondary" disabled>
+                            ← Précédent
+                        </button>
+                        <button id="nextButton" class="control-button primary" disabled>
+                            Suivant →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="resultsScreen" class="screen">
+                <div class="results-card">
+                    <div class="results-header">
+                        <div class="score-circle" id="scoreCircle">
+                            <span id="scorePercentage">85%</span>
+                        </div>
+                        <h2 id="scoreMessage">Excellent travail !</h2>
+                        <p id="scoreDetails">Vous avez obtenu 17/20 bonnes réponses</p>
+                    </div>
+                    
+                    <div class="results-breakdown">
+                        <h3>Résultats par catégorie :</h3>
+                        <div id="categoryResults">
+                            <!-- Résultats par catégorie générés dynamiquement -->
+                        </div>
+                    </div>
+                    
+                    <div class="results-actions">
+                        <button id="reviewButton" class="control-button secondary">
+                            📋 Revoir les réponses
+                        </button>
+                        <button id="restartButton" class="control-button primary">
+                            🔄 Recommencer
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Screen -->
+            <div id="reviewScreen" class="screen">
+                <div class="review-card">
+                    <div class="review-header">
+                        <h2>📋 Révision des réponses</h2>
+                        <button id="backToResults" class="control-button secondary">← Retour</button>
+                    </div>
+                    
+                    <div id="reviewContent">
+                        <!-- Contenu de révision généré dynamiquement -->
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🎓 Généré automatiquement à partir du cours LaTeX</p>
+            <p><a href="https://github.com/adatil/maths-qcm-generator" target="_blank">⭐ Voir sur GitHub</a></p>
+        </footer>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Chargement des questions...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

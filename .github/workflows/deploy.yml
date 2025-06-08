@@ -1,0 +1,150 @@
+name: 🚀 Deploy QCM Generator
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'cours/**'
+      - 'scripts/**'
+      - '*.html'
+      - '*.css'
+      - '*.js'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: 📦 Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install regex json pathlib
+        
+    - name: 🔍 Parse LaTeX course
+      run: |
+        cd scripts
+        python latex_parser.py
+        
+    - name: 🎯 Generate QCM questions
+      run: |
+        cd scripts  
+        python qcm_generator.py
+        
+    - name: 📊 Generate statistics
+      run: |
+        echo "📈 QCM Generation Statistics" > generation_report.md
+        echo "================================" >> generation_report.md
+        echo "" >> generation_report.md
+        echo "🕒 Generated at: $(date)" >> generation_report.md
+        echo "📁 Course file: cours/Nombres_3.tex" >> generation_report.md
+        
+        if [ -f "qcm-data/generated_questions.json" ]; then
+          QUESTION_COUNT=$(python3 -c "import json; data=json.load(open('qcm-data/generated_questions.json')); print(len(data['questions']))")
+          echo "❓ Total questions generated: $QUESTION_COUNT" >> generation_report.md
+          
+          CATEGORIES=$(python3 -c "import json; data=json.load(open('qcm-data/generated_questions.json')); cats={}; [cats.update({q['category']: cats.get(q['category'], 0) + 1}) for q in data['questions']]; [print(f'{k}: {v}') for k,v in cats.items()]")
+          echo "" >> generation_report.md
+          echo "📋 Questions by category:" >> generation_report.md
+          echo "$CATEGORIES" | sed 's/^/  - /' >> generation_report.md
+        else
+          echo "❌ No questions file generated" >> generation_report.md
+        fi
+        
+        echo "" >> generation_report.md
+        echo "🔗 Live demo: https://adatil.github.io/maths-qcm-generator/" >> generation_report.md
+        
+    - name: 📱 Generate PWA icons (mock)
+      run: |
+        mkdir -p icons
+        # Création d'icônes basiques avec ImageMagick (si disponible) ou placeholders
+        echo "Generating PWA icons..."
+        
+        # Créer un placeholder SVG simple
+        cat > icons/icon-base.svg << 'EOF'
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <rect width="512" height="512" fill="#3B82F6" rx="64"/>
+          <text x="256" y="280" font-family="Arial, sans-serif" font-size="200" fill="white" text-anchor="middle">🧮</text>
+          <text x="256" y="350" font-family="Arial, sans-serif" font-size="48" fill="white" text-anchor="middle">QCM</text>
+          <text x="256" y="400" font-family="Arial, sans-serif" font-size="32" fill="#E5E7EB" text-anchor="middle">MATHS</text>
+        </svg>
+        EOF
+        
+        # Si ImageMagick n'est pas disponible, créer des copies du SVG
+        for size in 72 96 128 144 152 192 384 512; do
+          cp icons/icon-base.svg "icons/icon-${size}x${size}.png"
+        done
+        
+    - name: 🛠️ Setup Node.js (for GitHub Pages deployment)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: 📋 Create build info
+      run: |
+        echo "{
+          \"buildTime\": \"$(date -Iseconds)\",
+          \"commit\": \"${{ github.sha }}\",
+          \"branch\": \"${{ github.ref_name }}\",
+          \"repository\": \"${{ github.repository }}\"
+        }" > build-info.json
+        
+    - name: 🎨 Optimize for deployment
+      run: |
+        # Minifier le CSS et JS si nécessaire (optionnel)
+        echo "Optimization step (placeholder for future enhancements)"
+        
+        # S'assurer que tous les fichiers nécessaires sont présents
+        ls -la
+        
+        # Vérifier les fichiers critiques
+        if [ ! -f "index.html" ]; then echo "❌ index.html missing!"; exit 1; fi
+        if [ ! -f "styles.css" ]; then echo "❌ styles.css missing!"; exit 1; fi
+        if [ ! -f "app.js" ]; then echo "❌ app.js missing!"; exit 1; fi
+        if [ ! -f "manifest.json" ]; then echo "❌ manifest.json missing!"; exit 1; fi
+        
+        echo "✅ All critical files present"
+        
+    - name: 📊 Generate deployment summary
+      run: |
+        echo "## 🚀 QCM Generator Deployment Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**🕒 Deployment Time:** $(date)" >> $GITHUB_STEP_SUMMARY
+        echo "**📦 Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "qcm-data/generated_questions.json" ]; then
+          QUESTION_COUNT=$(python3 -c "import json; data=json.load(open('qcm-data/generated_questions.json')); print(len(data['questions']))")
+          echo "**❓ Questions Generated:** $QUESTION_COUNT" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**🔗 Live Application:** https://adatil.github.io/maths-qcm-generator/" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**📱 Features:**" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Progressive Web App (PWA)" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Offline functionality" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Mobile responsive" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Auto-generated from LaTeX course" >> $GITHUB_STEP_SUMMARY
+        
+    - name: 🌐 Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
+        exclude_assets: '.github,scripts/latex_parser.py,scripts/qcm_generator.py,cours'
+        
+    - name: 🎉 Success notification
+      run: |
+        echo "🎉 Deployment successful!"
+        echo "📱 Your QCM app is now live at: https://adatil.github.io/maths-qcm-generator/"
+        echo "🔄 The app will automatically update when you push changes to your course files"
