@@ -1,0 +1,262 @@
+{
+  "title": "QCM - Nombres Réels et Racines Carrées",
+  "description": "QCM automatique généré à partir du cours Nombres_3",
+  "duration": 20,
+  "questions": [
+    {
+      "id": "def_racine_1",
+      "category": "definition",
+      "question": "Quelle est la définition de √a ?",
+      "options": [
+        "√a est le nombre positif qui a pour carré a",
+        "√a est le nombre négatif qui a pour carré a",
+        "√a peut être positif ou négatif",
+        "√a est toujours égal à a/2"
+      ],
+      "correct": 0,
+      "explanation": "√a est par définition le nombre positif qui, élevé au carré, donne a."
+    },
+    {
+      "id": "def_reels_1",
+      "category": "definition",
+      "question": "Comment note-t-on l'ensemble des nombres réels ?",
+      "options": ["ℕ", "ℤ", "ℚ", "ℝ"],
+      "correct": 3,
+      "explanation": "L'ensemble des nombres réels est noté ℝ."
+    },
+    {
+      "id": "def_intervalle_1",
+      "category": "definition",
+      "question": "Qu'est-ce qu'un intervalle ?",
+      "options": [
+        "Un ensemble de nombres entiers",
+        "Un sous-ensemble \"sans trous\" de ℝ",
+        "Un ensemble de fractions",
+        "Un ensemble fini de nombres"
+      ],
+      "correct": 1,
+      "explanation": "Un intervalle est un sous-ensemble \"sans trous\" de l'ensemble des nombres réels ℝ."
+    },
+    {
+      "id": "def_valabs_1",
+      "category": "definition",
+      "question": "Que représente |a| pour un nombre réel a ?",
+      "options": [
+        "Le double de a",
+        "L'opposé de a", 
+        "La distance entre a et 0",
+        "Le carré de a"
+      ],
+      "correct": 2,
+      "explanation": "La valeur absolue |a| représente la distance entre a et 0 sur la droite des réels."
+    },
+    {
+      "id": "sqrt_exact_1",
+      "category": "calculation",
+      "question": "Calculez √25",
+      "options": ["4", "5", "6", "7"],
+      "correct": 1,
+      "explanation": "√25 = 5 car 5² = 25"
+    },
+    {
+      "id": "sqrt_exact_2", 
+      "category": "calculation",
+      "question": "Calculez √64",
+      "options": ["6", "7", "8", "9"],
+      "correct": 2,
+      "explanation": "√64 = 8 car 8² = 64"
+    },
+    {
+      "id": "sqrt_exact_3",
+      "category": "calculation", 
+      "question": "Calculez √121",
+      "options": ["10", "11", "12", "13"],
+      "correct": 1,
+      "explanation": "√121 = 11 car 11² = 121"
+    },
+    {
+      "id": "sqrt_simpl_1",
+      "category": "calculation",
+      "question": "Simplifiez √20",
+      "options": ["2√5", "4√5", "√10", "10"],
+      "correct": 0,
+      "explanation": "√20 = √(4×5) = √4 × √5 = 2√5"
+    },
+    {
+      "id": "sqrt_simpl_2",
+      "category": "calculation", 
+      "question": "Simplifiez √32",
+      "options": ["4√2", "2√8", "8√2", "16"],
+      "correct": 0,
+      "explanation": "√32 = √(16×2) = √16 × √2 = 4√2"
+    },
+    {
+      "id": "sqrt_simpl_3",
+      "category": "calculation",
+      "question": "Simplifiez √108",
+      "options": ["6√3", "9√12", "3√12", "12√3"],
+      "correct": 0,
+      "explanation": "√108 = √(36×3) = √36 × √3 = 6√3"
+    },
+    {
+      "id": "sqrt_prop_1",
+      "category": "property",
+      "question": "Quelle est la propriété de √a × √b ?",
+      "options": [
+        "√a × √b = √(a + b)",
+        "√a × √b = √(a × b)",
+        "√a × √b = √a + √b", 
+        "√a × √b = a × b"
+      ],
+      "correct": 1,
+      "explanation": "La propriété fondamentale est √a × √b = √(a × b)"
+    },
+    {
+      "id": "interval_notation_1",
+      "category": "interval",
+      "question": "Que signifie l'intervalle [2; 5] ?",
+      "options": [
+        "Tous les nombres x tels que 2 < x < 5",
+        "Tous les nombres x tels que 2 ≤ x ≤ 5",
+        "Tous les nombres x tels que 2 < x ≤ 5",
+        "Tous les nombres x tels que 2 ≤ x < 5"
+      ],
+      "correct": 1,
+      "explanation": "Les crochets fermés [ ] incluent les bornes, donc 2 ≤ x ≤ 5"
+    },
+    {
+      "id": "interval_notation_2",
+      "category": "interval",
+      "question": "Que signifie l'intervalle ]1; 4[ ?",
+      "options": [
+        "Tous les nombres x tels que 1 ≤ x ≤ 4",
+        "Tous les nombres x tels que 1 < x < 4",
+        "Tous les nombres x tels que 1 < x ≤ 4",
+        "Tous les nombres x tels que 1 ≤ x < 4"
+      ],
+      "correct": 1,
+      "explanation": "Les crochets ouverts ] [ excluent les bornes, donc 1 < x < 4"
+    },
+    {
+      "id": "interval_union_1",
+      "category": "interval",
+      "question": "Que vaut ]1;4] ∪ [3;6] ?",
+      "options": ["[1;6]", "]1;6]", "[3;4]", "]3;6]"],
+      "correct": 1,
+      "explanation": "L'union prend tous les éléments des deux intervalles, soit ]1;6]"
+    },
+    {
+      "id": "interval_intersection_1",
+      "category": "interval",
+      "question": "Que vaut ]1;4] ∩ [3;6] ?",
+      "options": ["[1;6]", "]1;6]", "[3;4]", "]3;6]"],
+      "correct": 2,
+      "explanation": "L'intersection prend seulement les éléments communs, soit [3;4]"
+    },
+    {
+      "id": "abs_calc_1",
+      "category": "calculation",
+      "question": "Calculez |-12|",
+      "options": ["12", "-12", "0", "24"],
+      "correct": 0,
+      "explanation": "|-12| = 12 car la valeur absolue est toujours positive"
+    },
+    {
+      "id": "abs_calc_2",
+      "category": "calculation",
+      "question": "Calculez |-7|",
+      "options": ["7", "-7", "0", "14"],
+      "correct": 0,
+      "explanation": "|-7| = 7 car la valeur absolue est toujours positive"
+    },
+    {
+      "id": "abs_distance_1",
+      "category": "calculation",
+      "question": "Quelle est la distance entre 2 et 11 ?",
+      "options": ["9", "13", "-9", "11"],
+      "correct": 0,
+      "explanation": "La distance est |2-11| = |-9| = 9"
+    },
+    {
+      "id": "calc_add_sqrt_1",
+      "category": "calculation",
+      "question": "Calculez 3√2 + 5√2",
+      "options": ["8√2", "8√4", "15√2", "8"],
+      "correct": 0,
+      "explanation": "3√2 + 5√2 = (3+5)√2 = 8√2"
+    },
+    {
+      "id": "calc_mult_sqrt_1",
+      "category": "calculation",
+      "question": "Calculez √2 × √14",
+      "options": ["√28", "2√7", "√16", "4√2"],
+      "correct": 1,
+      "explanation": "√2 × √14 = √2 × √(2×7) = √2 × √2 × √7 = 2√7"
+    },
+    {
+      "id": "calc_ineq_1",
+      "category": "property",
+      "question": "Comparez √9 + √16 et √(9+16)",
+      "options": [
+        "√9 + √16 = √(9+16)",
+        "√9 + √16 > √(9+16)",
+        "√9 + √16 < √(9+16)",
+        "On ne peut pas comparer"
+      ],
+      "correct": 1,
+      "explanation": "√9 + √16 = 3 + 4 = 7 et √25 = 5, donc 7 > 5. C'est l'inégalité triangulaire."
+    },
+    {
+      "id": "interval_centered_1",
+      "category": "interval",
+      "question": "L'intervalle [a-r;a+r] est caractérisé par quelle condition ?",
+      "options": [
+        "|x-a| ≤ r",
+        "|x-a| < r",
+        "|x+a| ≤ r",
+        "x ≤ a+r"
+      ],
+      "correct": 0,
+      "explanation": "Un intervalle centré en a de rayon r est caractérisé par |x-a| ≤ r"
+    },
+    {
+      "id": "sqrt_rational_1",
+      "category": "property",
+      "question": "Que peut-on dire de √2 ?",
+      "options": [
+        "√2 est un nombre rationnel",
+        "√2 est un nombre irrationnel",
+        "√2 = 1.4",
+        "√2 peut s'écrire sous forme de fraction"
+      ],
+      "correct": 1,
+      "explanation": "√2 est irrationnel, sa seule écriture exacte est √2"
+    },
+    {
+      "id": "perfect_squares_1",
+      "category": "definition",
+      "question": "Qu'appelle-t-on un carré parfait ?",
+      "options": [
+        "Un nombre qui se termine par 0",
+        "Un nombre dont la racine carrée est un entier",
+        "Un nombre pair",
+        "Un nombre multiple de 4"
+      ],
+      "correct": 1,
+      "explanation": "Un carré parfait est un nombre dont la racine carrée est un entier (comme 4, 9, 16, 25...)"
+    },
+    {
+      "id": "interval_infinite_1",
+      "category": "interval",
+      "question": "Pourquoi écrit-on [-2; +∞[ et non [-2; +∞] ?",
+      "options": [
+        "C'est une convention d'écriture",
+        "Parce que ∞ n'est pas un nombre réel",
+        "Pour faire plus joli",
+        "Les deux écritures sont équivalentes"
+      ],
+      "correct": 1,
+      "explanation": "Le symbole ∞ n'est pas un nombre réel, c'est pourquoi le crochet est toujours ouvert de ce côté"
+    }
+  ]
+}
